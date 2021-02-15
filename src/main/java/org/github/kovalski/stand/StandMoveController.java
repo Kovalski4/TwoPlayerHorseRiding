@@ -18,6 +18,7 @@ public interface StandMoveController {
     Player getRider();
 
     Entity getHorse();
+    
     Boolean isLocked();
 
     ArmorStand getStand();
