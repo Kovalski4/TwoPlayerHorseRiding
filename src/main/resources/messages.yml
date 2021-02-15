@@ -1,0 +1,23 @@
+version: 0.1
+language: english
+#
+# For your bug report, question and request
+# https://github.com/Kovalski263/TwoPlayerHorseRiding
+#
+# Prefix used by messages.
+prefix: "&6[TwoPlayerHorseRiding]"
+
+# Messages
+error_no_perm: "&cYou don't have permission to using this command!"
+cmd_reload: "&aTwoPlayerHorseWalking reloaded."
+enabled_walk_mode: "&aYou enabled walk mode, mount now walking."
+disabled_walk_mode: "&cYou disabled walk mode, mount speed back to normal."
+error_maximum_health_not_found: "&cMaximum health not found!"
+error_mount_not_found: "&cMount not found!"
+error_only_player: "&cOnly players can use this command!"
+error_already_slow: "&cYour mount slower than walk speed!"
+error_cannot_lock: "&cYou cannot lock this mount."
+mount_locked: "&aMount successfully locked."
+mount_unlocked: "&cMount successfully unlocked."
+error_not_allowed_entity: "&cThis mount is not allowed for two player riding."
+error_backseat_locked: "&cYou cannot sit back seat beacuse mount is locked!"

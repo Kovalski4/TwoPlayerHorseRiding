@@ -1,0 +1,21 @@
+name: TwoPlayerHorseRiding
+version: ${project.version}
+main: org.github.kovalski.TwoPlayerHorseRiding
+api-version: 1.16
+depend: [ProtocolLib]
+commands:
+  twoplayerhorseriding:
+    usage: /<command>
+    description: Admin command of TwoPlayerHorseRiding
+    permission: twoplayerhorseriding.admin
+  mount:
+    usage: /<command>
+    description: Player command to modify mount settings
+    permission: mount
+permissions:
+  mount.walk:
+    description: Toggle realistic movement speed for your mount
+  mount.lock:
+    description: Lock your backseat and prevent people to use it
+  twoplayerhorseriding.reload:
+    description: Reloads plugin configuration
