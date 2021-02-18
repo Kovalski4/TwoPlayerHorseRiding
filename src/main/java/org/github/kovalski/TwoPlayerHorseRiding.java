@@ -1,7 +1,5 @@
 package org.github.kovalski;
 
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
@@ -12,13 +10,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.github.kovalski.cmd.MountCommand;
 import org.github.kovalski.cmd.TwoPlayerHorseRidingCommand;
 import org.github.kovalski.data.Database;
-import org.github.kovalski.stand.StandMoveHandler;
+import org.github.kovalski.data.YamlConfig;
 import org.github.kovalski.listener.BukkitListener;
 import org.github.kovalski.listener.HorseListener;
 import org.github.kovalski.listener.PlayerListener;
 import org.github.kovalski.stand.StandMoveController;
+import org.github.kovalski.stand.StandMoveHandler;
 import org.github.kovalski.util.InventoryUtils;
-import org.github.kovalski.data.YamlConfig;
 import org.github.kovalski.util.MessageUtil;
 import org.github.kovalski.util.UpdateChecker;
 
@@ -35,7 +33,6 @@ public final class TwoPlayerHorseRiding extends JavaPlugin {
     private YamlConfig yamlConfig;
     private MessageUtil messageUtil;
     private Database database;
-    private ProtocolManager protocolManager;
     private InventoryUtils inventoryUtils;
     private HorseManager horseManager;
 
@@ -132,7 +129,6 @@ public final class TwoPlayerHorseRiding extends JavaPlugin {
         database = new Database();
         horseManager = new HorseManager();
         inventoryUtils = new InventoryUtils();
-        protocolManager = ProtocolLibrary.getProtocolManager();
     }
 
     public void initbStats(){
@@ -158,10 +154,6 @@ public final class TwoPlayerHorseRiding extends JavaPlugin {
 
     public HorseManager getHorseManager() {
         return horseManager;
-    }
-
-    public ProtocolManager getProtocolManager() {
-        return protocolManager;
     }
 
     public InventoryUtils getInventoryUtils() {

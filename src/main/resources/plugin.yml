@@ -2,7 +2,6 @@ name: TwoPlayerHorseRiding
 version: ${project.version}
 main: org.github.kovalski.TwoPlayerHorseRiding
 api-version: 1.16
-depend: [ProtocolLib]
 commands:
   twoplayerhorseriding:
     usage: /<command>
