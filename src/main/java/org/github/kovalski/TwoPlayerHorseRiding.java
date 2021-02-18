@@ -47,6 +47,7 @@ public final class TwoPlayerHorseRiding extends JavaPlugin {
         loadCommand();
         initbStats();
         new StandMoveHandler().runTaskTimer(this, 1L, 0);
+        checkUpdate();
     }
 
     @Override
@@ -65,7 +66,7 @@ public final class TwoPlayerHorseRiding extends JavaPlugin {
 
     private void checkUpdate(){
         Logger logger = this.getLogger();
-        new UpdateChecker(this, 86444).getVersion(version -> {
+        new UpdateChecker(this, 89058).getVersion(version -> {
             DefaultArtifactVersion spigotVer = new DefaultArtifactVersion(version);
             DefaultArtifactVersion currentVer = new DefaultArtifactVersion(this.getDescription().getVersion());
             if (currentVer.getIncrementalVersion() < spigotVer.getIncrementalVersion()) {
