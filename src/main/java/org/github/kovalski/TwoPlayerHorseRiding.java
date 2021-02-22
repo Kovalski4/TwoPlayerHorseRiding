@@ -1,8 +1,9 @@
 package org.github.kovalski;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -33,6 +34,7 @@ public final class TwoPlayerHorseRiding extends JavaPlugin {
     private YamlConfig yamlConfig;
     private MessageUtil messageUtil;
     private Database database;
+    private ProtocolManager protocolManager;
     private InventoryUtils inventoryUtils;
     private HorseManager horseManager;
 
@@ -67,9 +69,9 @@ public final class TwoPlayerHorseRiding extends JavaPlugin {
     private void checkUpdate(){
         Logger logger = this.getLogger();
         new UpdateChecker(this, 89058).getVersion(version -> {
-            DefaultArtifactVersion spigotVer = new DefaultArtifactVersion(version);
-            DefaultArtifactVersion currentVer = new DefaultArtifactVersion(this.getDescription().getVersion());
-            if (currentVer.getIncrementalVersion() < spigotVer.getIncrementalVersion()) {
+            double spigotVer = Double.parseDouble(version);
+            double currentVer = Double.parseDouble(this.getDescription().getVersion());
+            if (currentVer < spigotVer) {
                 logger.info("Checking for updates...");
                 logger.info("You are running outdated version of TwoPlayerHorseRiding (v"+currentVer+")");
                 logger.info("Get latest version at: https://www.spigotmc.org/resources/86444/");
@@ -130,6 +132,7 @@ public final class TwoPlayerHorseRiding extends JavaPlugin {
         database = new Database();
         horseManager = new HorseManager();
         inventoryUtils = new InventoryUtils();
+        protocolManager = ProtocolLibrary.getProtocolManager();
     }
 
     public void initbStats(){
@@ -155,6 +158,10 @@ public final class TwoPlayerHorseRiding extends JavaPlugin {
 
     public HorseManager getHorseManager() {
         return horseManager;
+    }
+
+    public ProtocolManager getProtocolManager() {
+        return protocolManager;
     }
 
     public InventoryUtils getInventoryUtils() {

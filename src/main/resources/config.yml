@@ -2,7 +2,7 @@ name: TwoPlayerHorseRiding
 author: Kovalski
 version: 0.1
 
-#It feed the horse automatically with the hay bale in the rider's hotbar slot.
+#It feed the horse automatically with the hay bale in the rider's hotbar slot
 auto_horse_feed: true
 
 #Health values from auto feed

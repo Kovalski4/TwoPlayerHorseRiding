@@ -2,6 +2,7 @@ package org.github.kovalski.listener;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,6 +13,7 @@ import org.github.kovalski.HorseManager;
 import org.github.kovalski.TwoPlayerHorseRiding;
 import org.github.kovalski.event.HorseDismountEvent;
 import org.github.kovalski.event.HorseMountEvent;
+import org.github.kovalski.stand.StandMoveController;
 import org.github.kovalski.stand.StandMoveHandler;
 import org.github.kovalski.task.HorseBreed;
 import org.github.kovalski.util.InventoryUtils;
@@ -69,6 +71,16 @@ public class HorseListener implements Listener {
                     StandMoveHandler.removeIfExist(horse);
                 case DEATH:
                     StandMoveHandler.removeIfExist(horse);
+            }
+        }
+        if (horse instanceof ArmorStand){
+            if (event.getRider() instanceof LivingEntity){
+                for (StandMoveController standMoveController : StandMoveHandler.horseStandMoveList){
+                    if (standMoveController.getStand().equals(horse)){
+                        standMoveController.getStandMove().sendVisiblePacket();
+                        return;
+                    }
+                }
             }
         }
     }

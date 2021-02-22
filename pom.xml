@@ -6,7 +6,7 @@
 
     <groupId>org.github.kovalski</groupId>
     <artifactId>TwoPlayerHorseRiding</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
     <packaging>jar</packaging>
 
     <name>HaronkenHorses</name>
@@ -99,9 +99,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-artifact</artifactId>
-            <version>3.0.3</version>
+            <groupId>com.github.dmulloy2</groupId>
+            <artifactId>ProtocolLib</artifactId>
+            <version>4.5.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

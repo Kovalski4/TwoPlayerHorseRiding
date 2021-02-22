@@ -23,4 +23,6 @@ public interface StandMoveController {
 
     ArmorStand getStand();
 
+    StandMove getStandMove();
+
 }

@@ -1,6 +1,7 @@
 package org.github.kovalski.event;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -9,6 +10,7 @@ import org.bukkit.event.HandlerList;
 public class HorseDismountEvent extends Event implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
+    private final Entity rider;
     private final LivingEntity horse;
     private final Location dismountLocation;
     private final DismountType dismountType;
@@ -20,8 +22,9 @@ public class HorseDismountEvent extends Event implements Cancellable {
         DEATH
     }
 
-    public HorseDismountEvent(LivingEntity horse, Location dismountLocation, DismountType dismountType){
+    public HorseDismountEvent(Entity rider, LivingEntity horse, Location dismountLocation, DismountType dismountType){
 
+        this.rider = rider;
         this.horse = horse;
         this.dismountLocation = dismountLocation;
         this.dismountType = dismountType;
@@ -45,6 +48,10 @@ public class HorseDismountEvent extends Event implements Cancellable {
 
     public static HandlerList getHandlerList() {
         return handlers;
+    }
+
+    public Entity getRider() {
+        return rider;
     }
 
     public LivingEntity getHorse() {

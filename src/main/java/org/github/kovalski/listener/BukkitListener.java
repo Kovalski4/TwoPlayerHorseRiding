@@ -24,14 +24,14 @@ public class BukkitListener implements Listener {
     public void onVehicleExit(VehicleExitEvent event) {
         if (event.getVehicle() instanceof LivingEntity){
             LivingEntity horse = (LivingEntity) event.getVehicle();
-            Bukkit.getPluginManager().callEvent(new HorseMountEvent(event.getExited(), horse, horse.getLocation()));
+            Bukkit.getPluginManager().callEvent(new HorseDismountEvent(event.getExited(), horse, horse.getLocation(), HorseDismountEvent.DismountType.DISMOUNT));
         }
     }
 
     @EventHandler
     public void onDeath(EntityDeathEvent event){
         LivingEntity horse = event.getEntity();
-        Bukkit.getPluginManager().callEvent(new HorseDismountEvent(horse, horse.getLocation(), HorseDismountEvent.DismountType.DEATH));
+        Bukkit.getPluginManager().callEvent(new HorseDismountEvent(event.getEntity().getPassenger(), horse, horse.getLocation(), HorseDismountEvent.DismountType.DEATH));
     }
 
 }
