@@ -6,7 +6,7 @@
 
     <groupId>org.github.kovalski</groupId>
     <artifactId>TwoPlayerHorseRiding</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
     <packaging>jar</packaging>
 
     <name>HaronkenHorses</name>
@@ -103,6 +103,11 @@
             <artifactId>ProtocolLib</artifactId>
             <version>4.5.1</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.LlmDl</groupId>
+            <artifactId>Towny</artifactId>
+            <version>0.96.7.0</version>
         </dependency>
     </dependencies>
 </project>
