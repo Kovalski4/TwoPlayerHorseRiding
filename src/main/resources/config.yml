@@ -1,6 +1,6 @@
 name: TwoPlayerHorseRiding
 author: Kovalski
-version: 0.1
+version: 0.2
 
 #It feed the horse automatically with the hay bale in the rider's hotbar slot
 auto_horse_feed: true
@@ -13,3 +13,6 @@ HORSE: true
 DONKEY: true
 MULE: true
 LLAMA: true
+
+#Towny Integration
+force_walk_in_towns: true

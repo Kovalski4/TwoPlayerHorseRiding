@@ -1,5 +1,6 @@
 package org.github.kovalski.util;
 import org.bukkit.ChatColor;
+import org.bukkit.util.CachedServerIcon;
 import org.github.kovalski.data.YamlConfig;
 
 public class MessageUtil {
@@ -23,7 +24,8 @@ public class MessageUtil {
         MOUNT_LOCKED,
         MOUNT_UNLOCKED,
         ERROR_NOT_ALLOWED_ENTITY,
-        ERROR_BACKSEAT_LOCKED
+        ERROR_BACKSEAT_LOCKED,
+        ERROR_NOT_ALLOWED_IN_TOWNS
     }
 
     public String getMessage(Messages messageName){
@@ -69,6 +71,9 @@ public class MessageUtil {
                 break;
             case ERROR_BACKSEAT_LOCKED:
                 string = messages.getString("error_backseat_locked");
+                break;
+            case ERROR_NOT_ALLOWED_IN_TOWNS:
+                string = messages.getString("error_not_allowed_in_towns");
                 break;
         }
 

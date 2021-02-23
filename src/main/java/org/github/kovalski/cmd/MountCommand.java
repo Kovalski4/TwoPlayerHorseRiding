@@ -20,7 +20,7 @@ public class MountCommand implements CommandExecutor, TabCompleter {
 
     private static final TwoPlayerHorseRiding instance = TwoPlayerHorseRiding.getInstance();
     private final HorseManager horseManager = instance.getHorseManager();
-    private MessageUtil messageUtil = instance.getMessageUtil();
+    private final MessageUtil messageUtil = instance.getMessageUtil();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
@@ -42,39 +42,21 @@ public class MountCommand implements CommandExecutor, TabCompleter {
 
             if (args[0].equals("walk")){
 
-                if (!rider.hasPermission("mount.walk")){
-                    rider.sendMessage(messageUtil.getMessage(MessageUtil.Messages.ERROR_NO_PERM));
-                    return true;
+                if (horseManager.canWalk(rider, horse)){
+                    horseManager.toggleWalk(rider, horse);
                 }
 
-                if (horseManager.isTwoPlayerAllowedEntity(horse)){
-                    horseManager.toggleWalk(horse, rider);
-                    return true;
-                }
-
-                else {
-                    rider.sendMessage(messageUtil.getMessage(MessageUtil.Messages.ERROR_NOT_ALLOWED_ENTITY));
-                    return true;
-                }
+                return true;
 
             }
 
             else if (args[0].equals("lock")){
 
-                if (!rider.hasPermission("mount.lock")){
-                    rider.sendMessage(messageUtil.getMessage(MessageUtil.Messages.ERROR_NO_PERM));
-                    return true;
+                if (horseManager.canLock(rider, horse)){
+                    horseManager.toggleLock(rider, horse);
                 }
 
-                if (horseManager.isTwoPlayerAllowedEntity(horse)){
-                    horseManager.toggleLock(horse, rider);
-                    return true;
-                }
-
-                else {
-                    rider.sendMessage(messageUtil.getMessage(MessageUtil.Messages.ERROR_NOT_ALLOWED_ENTITY));
-                    return true;
-                }
+                return true;
 
             }
 

@@ -2,6 +2,7 @@ package org.github.kovalski;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import com.palmergames.bukkit.towny.Towny;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.bstats.bukkit.Metrics;
@@ -15,6 +16,7 @@ import org.github.kovalski.data.YamlConfig;
 import org.github.kovalski.listener.BukkitListener;
 import org.github.kovalski.listener.HorseListener;
 import org.github.kovalski.listener.PlayerListener;
+import org.github.kovalski.listener.TownyListener;
 import org.github.kovalski.stand.StandMoveController;
 import org.github.kovalski.stand.StandMoveHandler;
 import org.github.kovalski.util.InventoryUtils;
@@ -37,11 +39,13 @@ public final class TwoPlayerHorseRiding extends JavaPlugin {
     private ProtocolManager protocolManager;
     private InventoryUtils inventoryUtils;
     private HorseManager horseManager;
+    public static Towny towny;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         instance = this;
+        towny = (Towny) Bukkit.getPluginManager().getPlugin("Towny");
         initConfig();
         setupSQLHikariPool();
         initManagers();
@@ -113,6 +117,9 @@ public final class TwoPlayerHorseRiding extends JavaPlugin {
         pluginManager.registerEvents(new HorseListener(), this);
         pluginManager.registerEvents(new PlayerListener(), this);
         pluginManager.registerEvents(new BukkitListener(), this);
+        if (towny != null){
+            pluginManager.registerEvents(new TownyListener(), this);
+        }
     }
 
     @SuppressWarnings("ConstantConditions")

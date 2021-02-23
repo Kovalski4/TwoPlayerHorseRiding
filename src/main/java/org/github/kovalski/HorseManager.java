@@ -1,5 +1,6 @@
 package org.github.kovalski;
 
+import com.palmergames.bukkit.towny.TownyAPI;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Entity;
@@ -42,7 +43,44 @@ public class HorseManager {
         return null;
     }
 
-    public void toggleWalk(LivingEntity horse, Player rider){
+    public boolean canWalk(Player rider, LivingEntity horse){
+        if (!rider.hasPermission("mount.walk")){
+            rider.sendMessage(messageUtil.getMessage(MessageUtil.Messages.ERROR_NO_PERM));
+            return false;
+        }
+
+        if (!isTwoPlayerAllowedEntity(horse)){
+            rider.sendMessage(messageUtil.getMessage(MessageUtil.Messages.ERROR_NOT_ALLOWED_ENTITY));
+            return false;
+        }
+
+        if (TwoPlayerHorseRiding.towny != null){
+            if (yamlConfig.getBoolean("force_walk_in_towns")){
+                if (!TownyAPI.getInstance().isWilderness(rider.getLocation())){
+                    rider.sendMessage(messageUtil.getMessage(MessageUtil.Messages.ERROR_NOT_ALLOWED_IN_TOWNS));
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public boolean canLock(Player rider, LivingEntity horse){
+        if (!rider.hasPermission("mount.lock")){
+            rider.sendMessage(messageUtil.getMessage(MessageUtil.Messages.ERROR_NO_PERM));
+            return false;
+        }
+
+        if (!isTwoPlayerAllowedEntity(horse)){
+            rider.sendMessage(messageUtil.getMessage(MessageUtil.Messages.ERROR_NOT_ALLOWED_ENTITY));
+            return false;
+        }
+
+        return true;
+    }
+
+    public void toggleWalk(Player rider, LivingEntity horse){
         AttributeInstance GENERIC_MOVEMENT_SPEED = horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
         String UUID = horse.getUniqueId().toString();
 
@@ -80,7 +118,7 @@ public class HorseManager {
 
     }
 
-    public void toggleLock(Entity horse, Player rider){
+    public void toggleLock(Player rider, LivingEntity horse){
         for (StandMoveController standMoveController : StandMoveHandler.horseStandMoveList) {
             if (standMoveController.getHorse().equals(horse)) {
                 if (standMoveController.isLocked()){
