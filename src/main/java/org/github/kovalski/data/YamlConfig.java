@@ -19,7 +19,32 @@ public class YamlConfig extends YamlConfiguration {
         this.fileName = fileName;
         saveDefaultConfig(file);
         this.load(file);
+        update(file);
     }
+
+    public void update(File file) {
+        if (!this.contains("version")) {
+            if (file.delete()) {
+                saveDefaultConfig(file);
+                this.load(file);
+            }
+        }
+
+        YamlConfiguration yamlConfiguration = new YamlConfiguration();
+        try {
+            yamlConfiguration.load(new BufferedReader(new InputStreamReader(instance.getResource(fileName))));
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        if (this.getDouble("version") < yamlConfiguration.getDouble("version")) {
+            if (file.delete()){
+                saveDefaultConfig(file);
+                this.load(file);
+            }
+        }
+    }
+
 
     @Override
     public void load(File file) {
