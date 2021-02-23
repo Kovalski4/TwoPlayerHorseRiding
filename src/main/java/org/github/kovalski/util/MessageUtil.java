@@ -1,4 +1,5 @@
 package org.github.kovalski.util;
+import org.bukkit.ChatColor;
 import org.github.kovalski.data.YamlConfig;
 
 public class MessageUtil {
@@ -74,13 +75,23 @@ public class MessageUtil {
         return format(getPrefix()+" "+string);
     }
 
+    public static String translateAlternateColorCodes(char altColorChar, String textToTranslate) {
+        char[] b = textToTranslate.toCharArray();
+        for (int i = 0; i < b.length - 1; i++) {
+            if (b[i] == altColorChar && "0123456789AaBbCcDdEeFfKkLlMmNnOoRr".indexOf(b[i+1]) > -1) {
+                b[i] = ChatColor.COLOR_CHAR;
+                b[i+1] = Character.toLowerCase(b[i+1]);
+            }
+        }
+        return new String(b);
+    }
+
     public String getPrefix(){
         return messages.getString("prefix");
     }
 
     public String format(String string){
-        return string
-                .replaceAll("&", "§");
+        return ChatColor.translateAlternateColorCodes('&', string);
     }
 
     public YamlConfig getMessages(){
