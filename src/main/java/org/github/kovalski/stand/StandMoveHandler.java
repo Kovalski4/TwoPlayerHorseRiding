@@ -30,7 +30,8 @@ public class StandMoveHandler extends BukkitRunnable {
         StandMoveController standMoveController = null;
         ArmorStand armorStand = (ArmorStand) horse.getWorld().spawnEntity(horse.getLocation(), EntityType.ARMOR_STAND);
         armorStand.setInvulnerable(true);
-        armorStand.setInvisible(true);
+        armorStand.setVisible(false);
+        armorStand.setGravity(false);
         switch (entityType) {
             case HORSE:
                 standMoveController = new HorseStandMove(rider, horse, armorStand);
@@ -83,5 +84,4 @@ public class StandMoveHandler extends BukkitRunnable {
             }
         }
     }
-
 }
