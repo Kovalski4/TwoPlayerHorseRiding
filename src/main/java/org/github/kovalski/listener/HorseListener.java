@@ -16,13 +16,11 @@ import org.github.kovalski.event.HorseMountEvent;
 import org.github.kovalski.stand.StandMoveController;
 import org.github.kovalski.stand.StandMoveHandler;
 import org.github.kovalski.task.HorseBreed;
-import org.github.kovalski.util.InventoryUtils;
 
 public class HorseListener implements Listener {
 
     private static final TwoPlayerHorseRiding instance = TwoPlayerHorseRiding.getInstance();
     private final HorseManager horseManager = instance.getHorseManager();
-    private final InventoryUtils inventoryUtils = instance.getInventoryUtils();
 
     @EventHandler
     public void onHorseTookDamage(EntityDamageEvent event) {
@@ -39,11 +37,8 @@ public class HorseListener implements Listener {
                     if (passanger == null){
                         return;
                     }
-                    if (inventoryUtils.hasHayBale(passanger)) {
-                        event.setCancelled(true);
-                        new HorseBreed(horse, new ItemStack(Material.HAY_BLOCK));
-                        inventoryUtils.delHayBale(passanger);
-                    }
+                    event.setCancelled(true);
+                    new HorseBreed(passanger, horse, new ItemStack(Material.HAY_BLOCK), event.getDamage());
                 }
             }
         }
