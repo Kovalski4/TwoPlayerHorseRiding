@@ -38,10 +38,18 @@ public class YamlConfig extends YamlConfiguration {
         }
 
         if (this.getDouble("version") < yamlConfiguration.getDouble("version")) {
-            if (file.delete()){
-                saveDefaultConfig(file);
-                this.load(file);
+            String newFileName = (file.getName()+"-"+this.getDouble("version")+"-old")
+                    .replaceAll("\\.yml", "")
+                    .replaceAll("\\.", "-");
+
+            try {
+                Files.move(file, new File(instance.getDataFolder(), newFileName));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
+            saveDefaultConfig(file);
+            this.load(file);
         }
     }
 
